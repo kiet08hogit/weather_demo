@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.TodayController" styleClass="root-pane">
+    <top>
+        <HBox alignment="CENTER" spacing="10" styleClass="top-bar">
+            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+            <Text text="☁ WeatherNow" styleClass="top-bar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="3-Day Forecast" onAction="#switchToForecast" styleClass="top-bar-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <Text text="📍 Chicago, IL" styleClass="location-text"/>
+            <Text text="Today" styleClass="date-text"/>
+
+            <VBox alignment="CENTER" spacing="15" styleClass="main-weather-card">
+                <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+                <Text fx:id="centerIconTxt" text="☀" styleClass="main-icon"/>
+                <HBox alignment="CENTER" spacing="5">
+                    <Text fx:id="tempTxt" text="--" styleClass="main-temp"/>
+                    <Text text="°F" styleClass="main-temp-unit"/>
+                </HBox>
+                <Text fx:id="shortForecastTxt" text="Loading..." styleClass="main-short-forecast"/>
+            </VBox>
+
+            <HBox alignment="CENTER" spacing="20">
+                <VBox alignment="CENTER_LEFT" spacing="10" styleClass="stat-card">
+                    <Text text="💨 Wind Speed" styleClass="stat-lbl"/>
+                    <Text fx:id="windSpeedTxt" text="-- mph" styleClass="stat-val"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="10" styleClass="stat-card">
+                    <Text text="🧭 Direction" styleClass="stat-lbl"/>
+                    <Text fx:id="windDirTxt" text="--" styleClass="stat-val"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
