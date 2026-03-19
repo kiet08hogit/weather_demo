@@ -23,14 +23,14 @@ public class ForecastController implements Initializable {
     public void setModel(WeatherModel model, SceneManager sceneManager) {
         this.model = model;
         this.sceneManager = sceneManager;
+        refresh();
+    }
 
-        ArrayList<Period> forecast = model.getThreeDayForecast();
-        if (forecast.isEmpty()) {
-            model.fetchForecast();
-            forecast = model.getThreeDayForecast();
+    public void refresh() {
+        if (model != null) {
+            ArrayList<Period> forecast = model.getThreeDayForecast();
+            updateView(forecast);
         }
-
-        updateView(forecast);
     }
 
     private void updateView(ArrayList<Period> periods) {

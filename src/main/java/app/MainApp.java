@@ -39,6 +39,9 @@ public class MainApp extends Application {
             forecastCtrl.setModel(weatherModel, sceneManager);
             Scene forecastScene = new Scene(forecastRoot, 900, 600);
 
+            // Link controllers
+            todayCtrl.setForecastController(forecastCtrl);
+
             // Add stylesheet
             String cssPath = getClass().getResource("/style.css") != null ? getClass().getResource("/style.css").toExternalForm() : "data:text/css,";
             todayScene.getStylesheets().add(cssPath);
