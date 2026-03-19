@@ -253,7 +253,6 @@ public class RecommendationUtil {
         ));
     }
 
->>>>>>> origin/main
     public static String getClothing(int temp, String weather) {
         String w = weather != null ? weather.toLowerCase() : "";
         if (w.contains("rain") || w.contains("showers")) {
