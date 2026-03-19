@@ -6,9 +6,21 @@ import java.util.ArrayList;
 
 public class WeatherModel {
     private ArrayList<Period> forecast;
+    private String currentLocationName = "Chicago, IL";
     private String gridRegion = "LOT";
     private int gridX = 77;
     private int gridY = 70;
+
+    public void setLocation(String name, String region, int x, int y) {
+        this.currentLocationName = name;
+        this.gridRegion = region;
+        this.gridX = x;
+        this.gridY = y;
+    }
+
+    public String getCurrentLocationName() {
+        return currentLocationName;
+    }
 
     public boolean fetchForecast() {
         try {

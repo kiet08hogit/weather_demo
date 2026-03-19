@@ -17,7 +17,19 @@
     <center>
         <VBox alignment="CENTER" spacing="20">
             <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-            <Text text="📍 Chicago, IL" styleClass="location-text"/>
+            <HBox alignment="CENTER" spacing="10">
+                <Text fx:id="locationTxt" text="📍 Chicago, IL" styleClass="location-text"/>
+                <MenuButton fx:id="locationMenuBtn" styleClass="location-dropdown-btn">
+                    <items>
+                        <MenuItem text="➕ Add another location" onAction="#handleAddLocation"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Chicago, IL" onAction="#handleSwitchLocationChicago"/>
+                        <MenuItem text="Portland, ME" onAction="#handleSwitchLocationPortland"/>
+                        <MenuItem text="Las Vegas, NV" onAction="#handleSwitchLocationLasVegas"/>
+                        <MenuItem text="Boston, MA" onAction="#handleSwitchLocationBoston"/>
+                    </items>
+                </MenuButton>
+            </HBox>
             <Text text="Today" styleClass="date-text"/>
 
             <VBox alignment="CENTER" spacing="15" styleClass="main-weather-card">
