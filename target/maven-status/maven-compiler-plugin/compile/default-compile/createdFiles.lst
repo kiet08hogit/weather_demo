@@ -1,4 +1,5 @@
 app\MainApp.class
+util\RecommendationUtil$CityActivities.class
 controller\TodayController.class
 MyWeatherAPI.class
 controller\ForecastController.class

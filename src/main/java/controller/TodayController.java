@@ -190,7 +190,7 @@ public class TodayController implements Initializable {
         centerIconTxt.setIconLiteral(icon.getIconLiteral());
 
         outfitTxt.setText(util.RecommendationUtil.getClothing(todayPeriod.temperature, todayPeriod.shortForecast));
-        activityTxt.setText(util.RecommendationUtil.getActivity(todayPeriod.temperature, todayPeriod.shortForecast));
+        activityTxt.setText(util.RecommendationUtil.getActivity(locationTxt.getText(), todayPeriod.temperature, todayPeriod.shortForecast));
     }
 
     @FXML
