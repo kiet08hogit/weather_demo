@@ -1,11 +1,11 @@
 /* Global Font & Colors */
 .root {
-    -fx-font-family: "Segoe UI", "Inter", "Arial", sans-serif;
+    -fx-font-family: "Ubuntu", "DejaVu Sans", "Segoe UI", "Inter", "Arial", sans-serif;
 }
 
 /* Background Gradients */
 .root-pane {
-    -fx-background-color: linear-gradient(to bottom, #0ACFFE, #495AFF);
+    -fx-background-color: #57a8ff;
 }
 
 /* Text Base Settings for all text within root */
