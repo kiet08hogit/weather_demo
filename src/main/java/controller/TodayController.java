@@ -12,6 +12,7 @@ import weather.Period;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/* Controller for today view */
 public class TodayController implements Initializable {
     private WeatherModel model;
     private SceneManager sceneManager;
@@ -23,11 +24,13 @@ public class TodayController implements Initializable {
     @FXML private Text windDirTxt;
     @FXML private FontIcon centerIconTxt;
     @FXML private Text locationTxt;
+    @FXML private javafx.scene.layout.BorderPane rootPane;
 
     public void setForecastController(ForecastController fc) {
         this.forecastController = fc;
     }
 
+    // Map for some default cities coordinates
     private static final java.util.Map<String, String> CITY_COORDS = java.util.Map.ofEntries(
         java.util.Map.entry("new york", "40.71,-74.00"),
         java.util.Map.entry("los angeles", "34.05,-118.24"),
@@ -57,6 +60,7 @@ public class TodayController implements Initializable {
         java.util.Map.entry("atlanta", "33.74,-84.38")
     );
 
+    // Handle adding new location from user
     @FXML
     private void handleAddLocation() {
         javafx.scene.control.TextInputDialog dialog = new javafx.scene.control.TextInputDialog("New York");
@@ -67,12 +71,9 @@ public class TodayController implements Initializable {
         java.util.Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
             String cityNameInput = result.get().trim().toLowerCase();
-            String coordsStr = CITY_COORDS.get(cityNameInput);
             
-            if (coordsStr == null) {
-                // Try geocoding via Nominatim
-                coordsStr = geocodeCity(result.get().trim());
-            }
+            // Get coordinates from default list
+            String coordsStr = CITY_COORDS.get(cityNameInput);
 
             if (coordsStr != null) {
                 try {
@@ -113,27 +114,7 @@ public class TodayController implements Initializable {
         }
     }
 
-    private String geocodeCity(String city) {
-        try {
-            String url = "https://nominatim.openstreetmap.org/search?q=" + java.net.URLEncoder.encode(city, "UTF-8") + "&format=json&limit=1";
-            java.net.http.HttpResponse<String> response = java.net.http.HttpClient.newHttpClient().send(
-                java.net.http.HttpRequest.newBuilder().uri(java.net.URI.create(url)).header("User-Agent", "WeatherDemoApp").build(),
-                java.net.http.HttpResponse.BodyHandlers.ofString()
-            );
-            if (response.statusCode() == 200) {
-                com.fasterxml.jackson.databind.JsonNode rootNode = new com.fasterxml.jackson.databind.ObjectMapper().readTree(response.body());
-                if (rootNode.isArray() && rootNode.size() > 0) {
-                    String lat = rootNode.get(0).path("lat").asText();
-                    String lon = rootNode.get(0).path("lon").asText();
-                    return lat + "," + lon;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
+    // Functions to switch between default cities in option list
     @FXML 
     private void handleSwitchLocationChicago() {
         updateLocation("Chicago, IL", "LOT", 77, 70);
@@ -173,11 +154,13 @@ public class TodayController implements Initializable {
         this.sceneManager = sceneManager;
 
         if (model.fetchForecast()) {
+            // Get initial weather information
             Period today = model.getToday();
             updateView(today);
         }
     }
 
+    // Update user interface based on weather data
     private void updateView(Period todayPeriod) {
         if (todayPeriod == null) return;
         
@@ -191,8 +174,20 @@ public class TodayController implements Initializable {
 
         outfitTxt.setText(util.RecommendationUtil.getClothing(todayPeriod.temperature, todayPeriod.shortForecast));
         activityTxt.setText(util.RecommendationUtil.getActivity(todayPeriod.temperature, todayPeriod.shortForecast));
+
+        // Set background image and theme based on weather
+        String bgUrl = ImageUtil.getBackgroundUrl(todayPeriod.shortForecast, todayPeriod.isDaytime);
+        rootPane.setStyle("-fx-background-image: url('" + bgUrl + "');");
+        
+        rootPane.getStyleClass().removeAll("dark-theme", "light-theme");
+        if (ImageUtil.isDarkBackground(todayPeriod.shortForecast, todayPeriod.isDaytime)) {
+            rootPane.getStyleClass().add("dark-theme");
+        } else {
+            rootPane.getStyleClass().add("light-theme");
+        }
     }
 
+    // Switch to 3-day forecast view
     @FXML
     private void switchToForecast() {
         if (sceneManager != null) {

@@ -1,7 +1,9 @@
 package util;
 
+/* Utility class for weather recommendations */
 public class RecommendationUtil {
 
+    // Get clothing recommendation based on temperature and weather
     public static String getClothing(int temp, String weather) {
         String w = weather != null ? weather.toLowerCase() : "";
         if (w.contains("rain") || w.contains("showers")) {
@@ -19,6 +21,7 @@ public class RecommendationUtil {
         }
     }
 
+    // Get activity recommendation based on temperature and weather
     public static String getActivity(int temp, String weather) {
         String w = weather != null ? weather.toLowerCase() : "";
         if (w.contains("rain") || w.contains("showers") || w.contains("storm")) {
