@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.TodayController" styleClass="root-pane">
     <top>
@@ -21,7 +22,7 @@
 
             <VBox alignment="CENTER" spacing="15" styleClass="main-weather-card">
                 <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
-                <Text fx:id="centerIconTxt" text="☀" styleClass="main-icon"/>
+                <FontIcon fx:id="centerIconTxt" iconLiteral="fas-sun" styleClass="main-icon"/>
                 <HBox alignment="CENTER" spacing="5">
                     <Text fx:id="tempTxt" text="--" styleClass="main-temp"/>
                     <Text text="°F" styleClass="main-temp-unit"/>

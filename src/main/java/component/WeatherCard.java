@@ -6,11 +6,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import org.kordamp.ikonli.javafx.FontIcon;
+
 public class WeatherCard extends VBox {
 
     private Text periodNameTxt;
     private Text shortForecastTxt;
-    private Text iconTxt;
+    private FontIcon iconTxt;
     private Text tempTxt;
     private Text windTxt;
 
@@ -30,7 +32,7 @@ public class WeatherCard extends VBox {
         shortForecastTxt.getStyleClass().add("card-short-forecast");
         labels.getChildren().addAll(periodNameTxt, shortForecastTxt);
 
-        iconTxt = new Text();
+        iconTxt = new FontIcon();
         iconTxt.getStyleClass().add("card-icon");
 
         HBox.setHgrow(labels, javafx.scene.layout.Priority.ALWAYS);
@@ -47,11 +49,11 @@ public class WeatherCard extends VBox {
         this.getChildren().addAll(topRow, tempTxt, windTxt);
     }
 
-    public void setData(String name, String shortFcast, String temp, String wind, Text iconObj) {
+    public void setData(String name, String shortFcast, String temp, String wind, FontIcon iconObj) {
         periodNameTxt.setText(name);
         shortForecastTxt.setText(shortFcast);
         tempTxt.setText(temp + "\u00B0 F");
         windTxt.setText("\uD83D\uDCA8 " + wind); // wind emoji
-        iconTxt.setText(iconObj.getText());
+        iconTxt.setIconLiteral(iconObj.getIconLiteral());
     }
 }

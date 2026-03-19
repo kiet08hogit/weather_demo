@@ -4,6 +4,7 @@ import app.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
+import org.kordamp.ikonli.javafx.FontIcon;
 import model.WeatherModel;
 import util.ImageUtil;
 import weather.Period;
@@ -19,7 +20,7 @@ public class TodayController implements Initializable {
     @FXML private Text shortForecastTxt;
     @FXML private Text windSpeedTxt;
     @FXML private Text windDirTxt;
-    @FXML private Text centerIconTxt;
+    @FXML private FontIcon centerIconTxt;
 
     public void setModel(WeatherModel model, SceneManager sceneManager) {
         this.model = model;
@@ -39,8 +40,8 @@ public class TodayController implements Initializable {
         windSpeedTxt.setText(todayPeriod.windSpeed);
         windDirTxt.setText(todayPeriod.windDirection);
         
-        Text icon = ImageUtil.getIconForWeather(todayPeriod.shortForecast, todayPeriod.isDaytime);
-        centerIconTxt.setText(icon.getText());
+        FontIcon icon = ImageUtil.getIconForWeather(todayPeriod.shortForecast, todayPeriod.isDaytime);
+        centerIconTxt.setIconLiteral(icon.getIconLiteral());
     }
 
     @FXML
