@@ -156,7 +156,7 @@ public class TodayController implements Initializable {
 
     private void updateLocation(String name, String region, int x, int y) {
         model.setLocation(name, region, x, y);
-        locationTxt.setText("📍 " + name);
+        locationTxt.setText(name);
         if (model.fetchForecast()) {
             updateView(model.getToday());
             if (forecastController != null) {
