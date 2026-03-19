@@ -1,5 +1,6 @@
 package util;
 
+/* Utility class for weather recommendations */
 import java.util.HashMap;
 import java.util.Map;
 
@@ -269,6 +270,7 @@ public class RecommendationUtil {
         }
     }
 
+    // Get activity recommendation based on location, temperature and weather
     public static String getActivity(String location, int temp, String weather) {
         String w = weather != null ? weather.toLowerCase() : "";
         String loc = location != null ? location.toLowerCase() : "";

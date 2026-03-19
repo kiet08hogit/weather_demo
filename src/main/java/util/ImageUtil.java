@@ -2,32 +2,99 @@ package util;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
-// Simple util to map short weather descriptions onto FontAwesome icons
+// utility class to get icon for weather
 public class ImageUtil {
     public static FontIcon getIconForWeather(String shortForecast, boolean isDay) {
-        String iconLiteral = "fas-cloud"; // default cloud
+        // default 
+        String iconLiteral = "fas-cloud"; 
         
         if (shortForecast != null) {
             String lowerCaseForecast = shortForecast.toLowerCase();
+            // sunny/clear
             if (lowerCaseForecast.contains("sunny") || lowerCaseForecast.contains("clear")) {
-                iconLiteral = isDay ? "fas-sun" : "fas-moon";
-            } else if (lowerCaseForecast.contains("rain") || lowerCaseForecast.contains("showers")) {
+                if(isDay){
+                    iconLiteral = "fas-sun";
+                } else{
+                    iconLiteral = "fas-moon";
+                }
+            } 
+            // rain
+            else if (lowerCaseForecast.contains("rain") || lowerCaseForecast.contains("showers")) {
                 iconLiteral = "fas-cloud-rain";
-            } else if (lowerCaseForecast.contains("snow")) {
+            } 
+            // snow
+            else if (lowerCaseForecast.contains("snow")) {
                 iconLiteral = "fas-snowflake";
-            } else if (lowerCaseForecast.contains("thunder") || lowerCaseForecast.contains("storm")) {
+            } 
+            // thunder/storm
+            else if (lowerCaseForecast.contains("thunder") || lowerCaseForecast.contains("storm")) {
                 iconLiteral = "fas-bolt";
-            } else if (lowerCaseForecast.contains("cloud")) {
+            } 
+            // cloud
+            else if (lowerCaseForecast.contains("cloud")) {
+                // partly cloud
                 if (lowerCaseForecast.contains("partly")) {
-                    iconLiteral = isDay ? "fas-cloud-sun" : "fas-cloud-moon";
-                } else {
+                    if(isDay){
+                        iconLiteral = "fas-cloud-sun";
+                    } else{
+                        iconLiteral = "fas-cloud-moon";
+                    }   
+                } 
+                // cloud
+                else {
                     iconLiteral = "fas-cloud";
                 }
             }
         }
 
+        // set color of icon
         FontIcon icon = new FontIcon(iconLiteral);
         icon.getStyleClass().add("weather-icon");
         return icon;
+    }
+
+    //Get background img base on weather and day/night
+    public static String getBackgroundUrl(String shortForecast, boolean isDay) {
+        if (shortForecast != null) {
+            String lower = shortForecast.toLowerCase();
+            // snow - day/night
+            if (lower.contains("snow")) {
+                if(isDay){
+                    return "/background/snowday.jpg";
+                } else{
+                    return "/background/snownight.jpg";
+                }
+            } 
+            // rain
+            else if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || lower.contains("thunder")) {
+                return "/background/rainy.jpg";
+            } 
+            // sunny/clear day
+            else if (lower.contains("sunny") || lower.contains("clear")) {
+                return "/background/sunny.jpg";
+            }
+        }
+        // default - cloudy - day/night
+        if(isDay){
+            return "/background/cloudyday.jpg";
+        } else{
+            return "/background/night.jpg";
+        }
+    }
+
+    // set up text color for light/dark theme
+    public static boolean isDarkBackground(String shortForecast, boolean isDay) {
+        // night - dark theme -> use white text
+        if (!isDay) return true;
+        
+        // day - light theme -> use black text(except sunny)
+        if (shortForecast != null) {
+            String lower = shortForecast.toLowerCase();
+            if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || 
+                lower.contains("thunder") || lower.contains("sunny") || lower.contains("clear")) {
+                return true;
+            }
+        }
+        return false;
     }
 }

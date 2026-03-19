@@ -5,8 +5,9 @@
 <?import javafx.geometry.Insets?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.TodayController" styleClass="root-pane">
+<BorderPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.TodayController" styleClass="root-pane">
     <top>
+        <!-- App logo, button to switch to 3-day's view -->
         <HBox alignment="CENTER" spacing="10" styleClass="top-bar">
             <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
             <HBox alignment="CENTER" spacing="8">
@@ -18,14 +19,16 @@
         </HBox>
     </top>
     <center>
+        <!-- Main content -->
         <VBox alignment="CENTER" spacing="20">
             <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <!-- Location, menu button -->
             <HBox alignment="CENTER" spacing="10">
                 <FontIcon iconLiteral="fas-map-marker-alt" iconSize="20" iconColor="white"/>
                 <Text fx:id="locationTxt" text="Chicago, IL" styleClass="location-text"/>
                 <MenuButton fx:id="locationMenuBtn" styleClass="location-dropdown-btn">
                     <items>
-                        <MenuItem text="➕ Add another location" onAction="#handleAddLocation"/>
+                        <MenuItem text="Add another location" onAction="#handleAddLocation"/>
                         <SeparatorMenuItem/>
                         <MenuItem text="Chicago, IL" onAction="#handleSwitchLocationChicago"/>
                         <MenuItem text="Portland, ME" onAction="#handleSwitchLocationPortland"/>
@@ -35,7 +38,8 @@
                 </MenuButton>
             </HBox>
             <Text text="Today" styleClass="date-text"/>
-
+            
+            <!-- Main weather, icon and temperature -->
             <VBox alignment="CENTER" spacing="15" styleClass="main-weather-card">
                 <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
                 <FontIcon fx:id="centerIconTxt" iconLiteral="fas-sun" styleClass="main-icon"/>
@@ -45,7 +49,8 @@
                 </HBox>
                 <Text fx:id="shortForecastTxt" text="Loading..." styleClass="main-short-forecast"/>
             </VBox>
-
+            
+            <!-- Weather statistics -->
             <HBox alignment="CENTER" spacing="20">
                 <VBox alignment="CENTER_LEFT" spacing="10" styleClass="stat-card">
                     <HBox alignment="CENTER_LEFT" spacing="6">

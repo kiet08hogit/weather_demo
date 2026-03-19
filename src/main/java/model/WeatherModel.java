@@ -11,6 +11,7 @@ public class WeatherModel {
     private int gridX = 77;
     private int gridY = 70;
 
+    // Set new location for weather model
     public void setLocation(String name, String region, int x, int y) {
         this.currentLocationName = name;
         this.gridRegion = region;
@@ -18,10 +19,12 @@ public class WeatherModel {
         this.gridY = y;
     }
 
+    // Get current location name
     public String getCurrentLocationName() {
         return currentLocationName;
     }
 
+    // Call API to get new forecast
     public boolean fetchForecast() {
         try {
             ArrayList<Period> loaded = WeatherAPI.getForecast(gridRegion, gridX, gridY);
@@ -35,6 +38,7 @@ public class WeatherModel {
         return false;
     }
 
+    // Get today's weather information
     public Period getToday() {
         if (forecast != null && !forecast.isEmpty()) {
             return forecast.get(0);
@@ -42,10 +46,11 @@ public class WeatherModel {
         return null;
     }
 
+    // get 3-day forecast
     public ArrayList<Period> getThreeDayForecast() {
         ArrayList<Period> threeDays = new ArrayList<>();
         if (forecast != null) {
-            // we want the first 6 periods (Day & Night for 3 days)
+            // get first 6 weather period
             int limit = Math.min(forecast.size(), 6);
             for (int i = 0; i < limit; i++) {
                 threeDays.add(forecast.get(i));
