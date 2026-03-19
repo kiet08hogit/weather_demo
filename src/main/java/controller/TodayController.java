@@ -22,6 +22,9 @@ public class TodayController implements Initializable {
     @FXML private Text windDirTxt;
     @FXML private FontIcon centerIconTxt;
 
+    @FXML private Text outfitTxt;
+    @FXML private Text activityTxt;
+
     public void setModel(WeatherModel model, SceneManager sceneManager) {
         this.model = model;
         this.sceneManager = sceneManager;
@@ -42,6 +45,9 @@ public class TodayController implements Initializable {
         
         FontIcon icon = ImageUtil.getIconForWeather(todayPeriod.shortForecast, todayPeriod.isDaytime);
         centerIconTxt.setIconLiteral(icon.getIconLiteral());
+
+        outfitTxt.setText(util.RecommendationUtil.getClothing(todayPeriod.temperature, todayPeriod.shortForecast));
+        activityTxt.setText(util.RecommendationUtil.getActivity(todayPeriod.temperature, todayPeriod.shortForecast));
     }
 
     @FXML

@@ -9,7 +9,10 @@
     <top>
         <HBox alignment="CENTER" spacing="10" styleClass="top-bar">
             <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
-            <Text text="☁ WeatherNow" styleClass="top-bar-title"/>
+            <HBox alignment="CENTER" spacing="8">
+                <FontIcon iconLiteral="fas-cloud" iconSize="22" iconColor="white"/>
+                <Text text="Weatherify" styleClass="top-bar-title"/>
+            </HBox>
             <Region HBox.hgrow="ALWAYS"/>
             <Button text="3-Day Forecast" onAction="#switchToForecast" styleClass="top-bar-btn"/>
         </HBox>
@@ -17,7 +20,10 @@
     <center>
         <VBox alignment="CENTER" spacing="20">
             <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-            <Text text="📍 Chicago, IL" styleClass="location-text"/>
+            <HBox alignment="CENTER" spacing="8">
+                <FontIcon iconLiteral="fas-map-marker-alt" iconSize="20" iconColor="white"/>
+                <Text text="Chicago, IL" styleClass="location-text"/>
+            </HBox>
             <Text text="Today" styleClass="date-text"/>
 
             <VBox alignment="CENTER" spacing="15" styleClass="main-weather-card">
@@ -32,12 +38,36 @@
 
             <HBox alignment="CENTER" spacing="20">
                 <VBox alignment="CENTER_LEFT" spacing="10" styleClass="stat-card">
-                    <Text text="💨 Wind Speed" styleClass="stat-lbl"/>
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <FontIcon iconLiteral="fas-wind" iconSize="14" iconColor="white"/>
+                        <Text text="Wind Speed" styleClass="stat-lbl"/>
+                    </HBox>
                     <Text fx:id="windSpeedTxt" text="-- mph" styleClass="stat-val"/>
                 </VBox>
                 <VBox alignment="CENTER_LEFT" spacing="10" styleClass="stat-card">
-                    <Text text="🧭 Direction" styleClass="stat-lbl"/>
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <FontIcon iconLiteral="fas-compass" iconSize="14" iconColor="white"/>
+                        <Text text="Direction" styleClass="stat-lbl"/>
+                    </HBox>
                     <Text fx:id="windDirTxt" text="--" styleClass="stat-val"/>
+                </VBox>
+            </HBox>
+
+            <!-- Recommendation Stat Cards -->
+            <HBox alignment="CENTER" spacing="20">
+                <VBox alignment="CENTER_LEFT" spacing="10" styleClass="stat-card">
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <FontIcon iconLiteral="fas-tshirt" iconSize="14" iconColor="white"/>
+                        <Text text="Outfit to Wear" styleClass="stat-lbl"/>
+                    </HBox>
+                    <Text fx:id="outfitTxt" text="Loading..." styleClass="stat-val" wrappingWidth="180" style="-fx-font-size: 14px;"/>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="10" styleClass="stat-card">
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <FontIcon iconLiteral="fas-running" iconSize="14" iconColor="white"/>
+                        <Text text="Suggested Activity" styleClass="stat-lbl"/>
+                    </HBox>
+                    <Text fx:id="activityTxt" text="Loading..." styleClass="stat-val" wrappingWidth="180" style="-fx-font-size: 14px;"/>
                 </VBox>
             </HBox>
         </VBox>

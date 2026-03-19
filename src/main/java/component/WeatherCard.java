@@ -46,14 +46,21 @@ public class WeatherCard extends VBox {
         windTxt = new Text();
         windTxt.getStyleClass().add("card-wind");
 
-        this.getChildren().addAll(topRow, tempTxt, windTxt);
+        HBox windBox = new HBox(6);
+        windBox.setAlignment(Pos.CENTER_LEFT);
+        FontIcon windIconLbl = new FontIcon("fas-wind");
+        windIconLbl.setIconSize(12);
+        windIconLbl.setIconColor(javafx.scene.paint.Color.WHITE);
+        windBox.getChildren().addAll(windIconLbl, windTxt);
+
+        this.getChildren().addAll(topRow, tempTxt, windBox);
     }
 
     public void setData(String name, String shortFcast, String temp, String wind, FontIcon iconObj) {
         periodNameTxt.setText(name);
         shortForecastTxt.setText(shortFcast);
         tempTxt.setText(temp + "\u00B0 F");
-        windTxt.setText("\uD83D\uDCA8 " + wind); // wind emoji
+        windTxt.setText(wind);
         iconTxt.setIconLiteral(iconObj.getIconLiteral());
     }
 }
