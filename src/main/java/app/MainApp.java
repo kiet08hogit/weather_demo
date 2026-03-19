@@ -20,7 +20,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            primaryStage.setTitle("JavaFX Weather App");
+            primaryStage.setTitle("Weatherify");
+            primaryStage.setResizable(true);
 
             sceneManager = new SceneManager(primaryStage);
             weatherModel = new WeatherModel();
@@ -30,14 +31,14 @@ public class MainApp extends Application {
             Parent todayRoot = todayLoader.load();
             TodayController todayCtrl = todayLoader.getController();
             todayCtrl.setModel(weatherModel, sceneManager);
-            Scene todayScene = new Scene(todayRoot, 900, 600);
+            Scene todayScene = new Scene(todayRoot, 900, 750);
 
             // Load Forecast Scene
             FXMLLoader forecastLoader = new FXMLLoader(getClass().getResource("/FXML/forecast.fxml"));
             Parent forecastRoot = forecastLoader.load();
             ForecastController forecastCtrl = forecastLoader.getController();
             forecastCtrl.setModel(weatherModel, sceneManager);
-            Scene forecastScene = new Scene(forecastRoot, 900, 600);
+            Scene forecastScene = new Scene(forecastRoot, 900, 750);
 
             // Link controllers
             todayCtrl.setForecastController(forecastCtrl);

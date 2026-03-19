@@ -156,7 +156,7 @@ public class TodayController implements Initializable {
 
     private void updateLocation(String name, String region, int x, int y) {
         model.setLocation(name, region, x, y);
-        locationTxt.setText("📍 " + name);
+        locationTxt.setText(name);
         if (model.fetchForecast()) {
             updateView(model.getToday());
             if (forecastController != null) {
@@ -164,6 +164,9 @@ public class TodayController implements Initializable {
             }
         }
     }
+
+    @FXML private Text outfitTxt;
+    @FXML private Text activityTxt;
 
     public void setModel(WeatherModel model, SceneManager sceneManager) {
         this.model = model;
@@ -185,6 +188,9 @@ public class TodayController implements Initializable {
         
         FontIcon icon = ImageUtil.getIconForWeather(todayPeriod.shortForecast, todayPeriod.isDaytime);
         centerIconTxt.setIconLiteral(icon.getIconLiteral());
+
+        outfitTxt.setText(util.RecommendationUtil.getClothing(todayPeriod.temperature, todayPeriod.shortForecast));
+        activityTxt.setText(util.RecommendationUtil.getActivity(todayPeriod.temperature, todayPeriod.shortForecast));
     }
 
     @FXML
