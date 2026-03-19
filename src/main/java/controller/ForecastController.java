@@ -5,7 +5,7 @@ import component.WeatherCard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
+import org.kordamp.ikonli.javafx.FontIcon;
 import model.WeatherModel;
 import util.ImageUtil;
 import weather.Period;
@@ -40,7 +40,7 @@ public class ForecastController implements Initializable {
         int index = 0;
         for (Period p : periods) {
             WeatherCard card = new WeatherCard();
-            Text icon = ImageUtil.getIconForWeather(p.shortForecast, p.isDaytime);
+            FontIcon icon = ImageUtil.getIconForWeather(p.shortForecast, p.isDaytime);
             card.setData(p.name, p.shortForecast, String.valueOf(p.temperature), 
                          p.windSpeed + " " + p.windDirection, icon);
             

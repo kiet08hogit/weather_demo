@@ -1,35 +1,33 @@
 package util;
 
-import javafx.scene.text.Text;
+import org.kordamp.ikonli.javafx.FontIcon;
 
-// Simple util to map short weather descriptions onto text-based emoji icons
+// Simple util to map short weather descriptions onto FontAwesome icons
 public class ImageUtil {
-    public static Text getIconForWeather(String shortForecast, boolean isDay) {
-        String iconChar = "☁"; // default cloud
+    public static FontIcon getIconForWeather(String shortForecast, boolean isDay) {
+        String iconLiteral = "fas-cloud"; // default cloud
         
-        if (shortForecast == null) {
-            return new Text(iconChar);
-        }
-
-        String lowerCaseForecast = shortForecast.toLowerCase();
-        if (lowerCaseForecast.contains("sunny") || lowerCaseForecast.contains("clear")) {
-            iconChar = isDay ? "☀" : "🌙";
-        } else if (lowerCaseForecast.contains("rain") || lowerCaseForecast.contains("showers")) {
-            iconChar = "\uD83C\uDF27"; // rain cloud
-        } else if (lowerCaseForecast.contains("snow")) {
-            iconChar = "❄";
-        } else if (lowerCaseForecast.contains("thunder") || lowerCaseForecast.contains("storm")) {
-            iconChar = "⛈";
-        } else if (lowerCaseForecast.contains("cloud")) {
-            if (lowerCaseForecast.contains("partly")) {
-                iconChar = "⛅";
-            } else {
-                iconChar = "☁";
+        if (shortForecast != null) {
+            String lowerCaseForecast = shortForecast.toLowerCase();
+            if (lowerCaseForecast.contains("sunny") || lowerCaseForecast.contains("clear")) {
+                iconLiteral = isDay ? "fas-sun" : "fas-moon";
+            } else if (lowerCaseForecast.contains("rain") || lowerCaseForecast.contains("showers")) {
+                iconLiteral = "fas-cloud-rain";
+            } else if (lowerCaseForecast.contains("snow")) {
+                iconLiteral = "fas-snowflake";
+            } else if (lowerCaseForecast.contains("thunder") || lowerCaseForecast.contains("storm")) {
+                iconLiteral = "fas-bolt";
+            } else if (lowerCaseForecast.contains("cloud")) {
+                if (lowerCaseForecast.contains("partly")) {
+                    iconLiteral = isDay ? "fas-cloud-sun" : "fas-cloud-moon";
+                } else {
+                    iconLiteral = "fas-cloud";
+                }
             }
         }
 
-        Text iconText = new Text(iconChar);
-        iconText.getStyleClass().add("weather-icon");
-        return iconText;
+        FontIcon icon = new FontIcon(iconLiteral);
+        icon.getStyleClass().add("weather-icon");
+        return icon;
     }
 }

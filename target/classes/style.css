@@ -52,6 +52,8 @@
 .main-icon {
     -fx-font-size: 70px;
     -fx-fill: white;
+    -fx-icon-color: white;
+    -fx-icon-size: 70px;
 }
 
 .main-temp {
@@ -111,6 +113,8 @@
 
 .card-icon {
     -fx-font-size: 40px;
+    -fx-icon-color: white;
+    -fx-icon-size: 40px;
 }
 
 .card-temp {
