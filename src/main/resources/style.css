@@ -28,10 +28,12 @@
 .dark-theme .card-period-name,
 .dark-theme .card-short-forecast,
 .dark-theme .card-temp,
-.dark-theme .card-wind {
+.dark-theme .card-wind,
+.dark-theme .ikonli-font-icon {
     /* white text for dark theme */
     -fx-fill: white;
     -fx-text-fill: white;
+    -fx-icon-color: white;
 }
 
 /* light theme */

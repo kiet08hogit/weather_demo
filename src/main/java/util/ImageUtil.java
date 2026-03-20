@@ -91,14 +91,19 @@ public class ImageUtil {
         // night - dark theme -> use white text
         if (!isDay) return true;
         
-        // day - light theme -> use black text(except sunny)
+        // day - light theme -> use black text 
         if (shortForecast != null) {
             String lower = shortForecast.toLowerCase();
-            if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || 
-                lower.contains("thunder") || lower.contains("sunny") || lower.contains("clear")) {
-                return true;
+            
+            // Mirror the exact hierarchy of getBackgroundUrl
+            if (lower.contains("snow")) {
+                return false; // snowday.jpg is extremely bright
+            } else if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || lower.contains("thunder")) {
+                return true; // rainy.jpg is usually dark/grey
+            } else if (lower.contains("sunny") || lower.contains("clear")) {
+                return true; // sunny.jpg 
             }
         }
-        return false;
+        return false; // default cloudyday.jpg is light
     }
 }
