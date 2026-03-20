@@ -2,11 +2,11 @@ package model;
 
 import java.util.List;
 import java.util.ArrayList;
-import weather.IWeatherAdapter;
-import weather.IWeatherService;
-import weather.NWSWeatherAdapter;
-import weather.RealWeatherService;
-import weather.WeatherProxy;
+import adapter.IWeatherAdapter;
+import adapter.NWSWeatherAdapter;
+import service.IWeatherService;
+import service.RealWeatherService;
+import service.WeatherProxy;
 
 public class WeatherModel {
     private List<WeatherData> forecast; // Utilizing the decoupled WeatherData model

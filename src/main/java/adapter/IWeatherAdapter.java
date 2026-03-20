@@ -1,4 +1,4 @@
-package weather;
+package adapter;
 
 import java.util.List;
 import model.WeatherData;

@@ -1,6 +1,8 @@
-package weather;
+package service;
 
 import java.util.List;
+import weather.Period;
+import weather.WeatherAPI;
 
 // STEP 4: Real Service Implementation
 public class RealWeatherService implements IWeatherService {

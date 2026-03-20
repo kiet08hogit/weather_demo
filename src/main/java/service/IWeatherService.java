@@ -1,6 +1,7 @@
-package weather;
+package service;
 
 import java.util.List;
+import weather.Period;
 
 // STEP 3: Service Interface
 public interface IWeatherService {

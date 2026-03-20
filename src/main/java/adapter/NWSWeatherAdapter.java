@@ -1,8 +1,10 @@
-package weather;
+package adapter;
 
 import java.util.ArrayList;
 import java.util.List;
 import model.WeatherData;
+import weather.Period;
+import service.IWeatherService;
 
 // STEP 7: Implement the NWS specific adapter
 public class NWSWeatherAdapter implements IWeatherAdapter {
