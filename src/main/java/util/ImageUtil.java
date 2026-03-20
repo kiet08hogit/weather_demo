@@ -69,9 +69,13 @@ public class ImageUtil {
             else if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || lower.contains("thunder")) {
                 return "/background/rainy.jpg";
             } 
-            // sunny/clear day
+            // sunny-clear day / clear night
             else if (lower.contains("sunny") || lower.contains("clear")) {
-                return "/background/sunny.jpg";
+                if(isDay){
+                    return "/background/sunny.jpg";
+                } else{
+                    return "/background/night.jpg";
+                }
             }
         }
         // default - cloudy - day/night
