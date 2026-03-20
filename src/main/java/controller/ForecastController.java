@@ -8,10 +8,10 @@ import javafx.scene.layout.GridPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 import model.WeatherModel;
 import util.ImageUtil;
-import weather.Period;
+import model.WeatherData;
 
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /* Controller for 3-day forecast view */
@@ -32,34 +32,34 @@ public class ForecastController implements Initializable {
     // Refresh data display
     public void refresh() {
         if (model != null) {
-            ArrayList<Period> forecast = model.getThreeDayForecast();
+            List<WeatherData> forecast = model.getThreeDayForecast();
             updateView(forecast);
         }
     }
 
     // Update list of weather forecast cards
-    private void updateView(ArrayList<Period> periods) {
+    private void updateView(List<WeatherData> periods) {
         grid.getChildren().clear();
         if (periods == null || periods.isEmpty()) return;
 
         // Use the first forecast to set the background and theme
-        Period first = periods.get(0);
-        String bgUrl = ImageUtil.getBackgroundUrl(first.shortForecast, first.isDaytime);
+        WeatherData first = periods.get(0);
+        String bgUrl = ImageUtil.getBackgroundUrl(first.getShortForecast(), first.isDaytime());
         rootPane.setStyle("-fx-background-image: url('" + bgUrl + "');");
         
         rootPane.getStyleClass().removeAll("dark-theme", "light-theme");
-        if (ImageUtil.isDarkBackground(first.shortForecast, first.isDaytime)) {
+        if (ImageUtil.isDarkBackground(first.getShortForecast(), first.isDaytime())) {
             rootPane.getStyleClass().add("dark-theme");
         } else {
             rootPane.getStyleClass().add("light-theme");
         }
 
         int index = 0;
-        for (Period p : periods) {
+        for (WeatherData p : periods) {
             WeatherCard card = new WeatherCard();
-            FontIcon icon = ImageUtil.getIconForWeather(p.shortForecast, p.isDaytime);
-            card.setData(p.name, p.shortForecast, String.valueOf(p.temperature), 
-                         p.windSpeed + " " + p.windDirection, icon);
+            FontIcon icon = ImageUtil.getIconForWeather(p.getShortForecast(), p.isDaytime());
+            card.setData(p.getName(), p.getShortForecast(), String.valueOf(p.getTemperature()), 
+                         p.getWindSpeed() + " " + p.getWindDirection(), icon);
             
             int col = index % 2;
             int row = index / 2;

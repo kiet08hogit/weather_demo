@@ -7,7 +7,7 @@ import javafx.scene.text.Text;
 import org.kordamp.ikonli.javafx.FontIcon;
 import model.WeatherModel;
 import util.ImageUtil;
-import weather.Period;
+import model.WeatherData;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -155,32 +155,32 @@ public class TodayController implements Initializable {
 
         if (model.fetchForecast()) {
             // Get initial weather information
-            Period today = model.getToday();
+            WeatherData today = model.getToday();
             updateView(today);
         }
     }
 
     // Update user interface based on weather data
-    private void updateView(Period todayPeriod) {
+    private void updateView(WeatherData todayPeriod) {
         if (todayPeriod == null) return;
         
-        tempTxt.setText(String.valueOf(todayPeriod.temperature));
-        shortForecastTxt.setText(todayPeriod.shortForecast);
-        windSpeedTxt.setText(todayPeriod.windSpeed);
-        windDirTxt.setText(todayPeriod.windDirection);
+        tempTxt.setText(String.valueOf(todayPeriod.getTemperature()));
+        shortForecastTxt.setText(todayPeriod.getShortForecast());
+        windSpeedTxt.setText(todayPeriod.getWindSpeed());
+        windDirTxt.setText(todayPeriod.getWindDirection());
         
-        FontIcon icon = ImageUtil.getIconForWeather(todayPeriod.shortForecast, todayPeriod.isDaytime);
+        FontIcon icon = ImageUtil.getIconForWeather(todayPeriod.getShortForecast(), todayPeriod.isDaytime());
         centerIconTxt.setIconLiteral(icon.getIconLiteral());
 
-        outfitTxt.setText(util.RecommendationUtil.getClothing(todayPeriod.temperature, todayPeriod.shortForecast));
-        activityTxt.setText(util.RecommendationUtil.getActivity(locationTxt.getText(), todayPeriod.temperature, todayPeriod.shortForecast));
+        outfitTxt.setText(util.RecommendationUtil.getClothing(todayPeriod.getTemperature(), todayPeriod.getShortForecast()));
+        activityTxt.setText(util.RecommendationUtil.getActivity(locationTxt.getText(), todayPeriod.getTemperature(), todayPeriod.getShortForecast()));
 
         // Set background image and theme based on weather
-        String bgUrl = ImageUtil.getBackgroundUrl(todayPeriod.shortForecast, todayPeriod.isDaytime);
+        String bgUrl = ImageUtil.getBackgroundUrl(todayPeriod.getShortForecast(), todayPeriod.isDaytime());
         rootPane.setStyle("-fx-background-image: url('" + bgUrl + "');");
         
         rootPane.getStyleClass().removeAll("dark-theme", "light-theme");
-        if (ImageUtil.isDarkBackground(todayPeriod.shortForecast, todayPeriod.isDaytime)) {
+        if (ImageUtil.isDarkBackground(todayPeriod.getShortForecast(), todayPeriod.isDaytime())) {
             rootPane.getStyleClass().add("dark-theme");
         } else {
             rootPane.getStyleClass().add("light-theme");

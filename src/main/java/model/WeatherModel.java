@@ -1,15 +1,28 @@
 package model;
 
-import weather.Period;
-import weather.WeatherAPI;
+import java.util.List;
 import java.util.ArrayList;
+import weather.IWeatherAdapter;
+import weather.IWeatherService;
+import weather.NWSWeatherAdapter;
+import weather.RealWeatherService;
+import weather.WeatherProxy;
 
 public class WeatherModel {
-    private ArrayList<Period> forecast;
+    private List<WeatherData> forecast; // Utilizing the decoupled WeatherData model
     private String currentLocationName = "Chicago, IL";
     private String gridRegion = "LOT";
     private int gridX = 77;
     private int gridY = 70;
+    
+    private IWeatherAdapter adapter; // Retain an instance of the adapter layer
+
+    public WeatherModel() {
+        // STEP 8: Instantiate the architecture map
+        IWeatherService real = new RealWeatherService();
+        IWeatherService proxy = new WeatherProxy(real);
+        adapter = new NWSWeatherAdapter(proxy);
+    }
 
     // Set new location for weather model
     public void setLocation(String name, String region, int x, int y) {
@@ -27,7 +40,8 @@ public class WeatherModel {
     // Call API to get new forecast
     public boolean fetchForecast() {
         try {
-            ArrayList<Period> loaded = WeatherAPI.getForecast(gridRegion, gridX, gridY);
+            // Retrieve abstracted data completely seamlessly through the caching adapter proxy stack
+            List<WeatherData> loaded = adapter.getWeatherData(gridRegion, gridX, gridY);
             if (loaded != null && !loaded.isEmpty()) {
                 this.forecast = loaded;
                 return true;
@@ -39,7 +53,7 @@ public class WeatherModel {
     }
 
     // Get today's weather information
-    public Period getToday() {
+    public WeatherData getToday() {
         if (forecast != null && !forecast.isEmpty()) {
             return forecast.get(0);
         }
@@ -47,8 +61,8 @@ public class WeatherModel {
     }
 
     // get 3-day forecast
-    public ArrayList<Period> getThreeDayForecast() {
-        ArrayList<Period> threeDays = new ArrayList<>();
+    public List<WeatherData> getThreeDayForecast() {
+        List<WeatherData> threeDays = new ArrayList<>();
         if (forecast != null) {
             // get first 6 weather period
             int limit = Math.min(forecast.size(), 6);
