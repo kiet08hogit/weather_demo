@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 // controller for 3-day forecast view
-public class ForecastController implements Initializable {
+public class ForecastController implements Initializable{
     private WeatherModel model;
     private SceneManager sceneManager;
 
@@ -23,24 +23,26 @@ public class ForecastController implements Initializable {
     @FXML private javafx.scene.layout.BorderPane rootPane;
 
     // assign model and switch screen
-    public void setModel(WeatherModel model, SceneManager sceneManager) {
+    public void setModel(WeatherModel model, SceneManager sceneManager){
         this.model = model;
         this.sceneManager = sceneManager;
         refresh();
     }
 
     // refresh data display
-    public void refresh() {
-        if (model != null) {
+    public void refresh(){
+        if (model != null){
             List<WeatherData> forecast = model.getThreeDayForecast();
             updateView(forecast);
         }
     }
 
     // update list of weather forecast cards
-    private void updateView(List<WeatherData> periods) {
+    private void updateView(List<WeatherData> periods){
         grid.getChildren().clear(); //remove all existing cards
-        if (periods == null || periods.isEmpty()) return;
+        if (periods == null || periods.isEmpty()){
+            return;
+        }
 
         // use the first forecast to set the background and theme
         WeatherData first = periods.get(0);
@@ -48,15 +50,16 @@ public class ForecastController implements Initializable {
         rootPane.setStyle("-fx-background-image: url('" + bgUrl + "');");
         
         rootPane.getStyleClass().removeAll("dark-theme", "light-theme");
-        if (ImageUtil.isDarkBackground(first.getShortForecast(), first.isDaytime())) {
+        if (ImageUtil.isDarkBackground(first.getShortForecast(), first.isDaytime())){
             rootPane.getStyleClass().add("dark-theme");
-        } else {
+        } 
+        else{
             rootPane.getStyleClass().add("light-theme");
         }
 
         int index = 0;
         // loop through each period
-        for (WeatherData p : periods) {
+        for (WeatherData p : periods){
             WeatherCard card = new WeatherCard();
             FontIcon icon = ImageUtil.getIconForWeather(p.getShortForecast(), p.isDaytime());
             card.setData(p.getName(), p.getShortForecast(), String.valueOf(p.getTemperature()), p.getWindSpeed() + " " + p.getWindDirection(), icon);
@@ -71,13 +74,13 @@ public class ForecastController implements Initializable {
 
     // switch to today view
     @FXML
-    private void switchToToday() {
-        if (sceneManager != null) {
+    private void switchToToday(){
+        if (sceneManager != null){
             sceneManager.switchScene("Today");
         }
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources){
     }
 }

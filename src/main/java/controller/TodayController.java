@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /* Controller for today view */
-public class TodayController implements Initializable {
+public class TodayController implements Initializable{
     private WeatherModel model;
     private SceneManager sceneManager;
     private ForecastController forecastController;
@@ -26,11 +26,11 @@ public class TodayController implements Initializable {
     @FXML private Text locationTxt;
     @FXML private javafx.scene.layout.BorderPane rootPane;
 
-    public void setForecastController(ForecastController fc) {
+    public void setForecastController(ForecastController fc){
         this.forecastController = fc;
     }
 
-    // map for some default cities coordinates
+    // map for some cities coordinates
     private static final java.util.Map<String, String> CITY_COORDS = java.util.Map.ofEntries(
         java.util.Map.entry("new york", "40.71,-74.00"),
         java.util.Map.entry("los angeles", "34.05,-118.24"),
@@ -62,7 +62,7 @@ public class TodayController implements Initializable {
 
     // handle adding new location from user
     @FXML
-    private void handleAddLocation() {
+    private void handleAddLocation(){
         javafx.scene.control.TextInputDialog dialog = new javafx.scene.control.TextInputDialog("New York");
         dialog.setTitle("Add Another Location");
         dialog.setHeaderText("Enter City Name");
@@ -75,8 +75,8 @@ public class TodayController implements Initializable {
             // Get coordinates from default list
             String coordsStr = CITY_COORDS.get(cityNameInput);
 
-            if (coordsStr != null) {
-                try {
+            if (coordsStr != null){
+                try{
                     String[] latLon = coordsStr.split(",");
                     String lat = latLon[0];
                     String lon = latLon[1];
@@ -86,7 +86,7 @@ public class TodayController implements Initializable {
                         java.net.http.HttpResponse.BodyHandlers.ofString()
                     );
                     
-                    if (response.statusCode() == 200) {
+                    if(response.statusCode() == 200){
                         com.fasterxml.jackson.databind.JsonNode rootNode = new com.fasterxml.jackson.databind.ObjectMapper().readTree(response.body());
                         com.fasterxml.jackson.databind.JsonNode props = rootNode.path("properties");
                         String gridId = props.path("gridId").asText();
@@ -97,7 +97,7 @@ public class TodayController implements Initializable {
                         
                         // use the input name if it's a known city, else use NWS name
                         String finalName = cityNameInput.substring(0, 1).toUpperCase() + cityNameInput.substring(1) + ", " + stateName;
-                        if (cityNameInput.contains(" ")) {
+                        if (cityNameInput.contains(" ")){
                              // handle multi word names like "San Francisco"
                              String[] words = cityNameInput.split(" ");
                              finalName = "";
@@ -107,7 +107,8 @@ public class TodayController implements Initializable {
 
                         updateLocation(finalName, gridId, gridX, gridY);
                     }
-                } catch (Exception e) {
+                } 
+                catch(Exception e){
                     e.printStackTrace();
                 }
             }
@@ -116,31 +117,31 @@ public class TodayController implements Initializable {
 
     // default city handlers
     @FXML 
-    private void handleSwitchLocationChicago() {
+    private void handleSwitchLocationChicago(){
         updateLocation("Chicago, IL", "LOT", 77, 70);
     }
 
     @FXML 
-    private void handleSwitchLocationPortland() {
+    private void handleSwitchLocationPortland(){
         updateLocation("Portland, ME", "GYX", 52, 75);
     }
 
     @FXML 
-    private void handleSwitchLocationLasVegas() {
+    private void handleSwitchLocationLasVegas(){
         updateLocation("Las Vegas, NV", "VEF", 119, 93);
     }
 
     @FXML 
-    private void handleSwitchLocationBoston() {
+    private void handleSwitchLocationBoston(){
         updateLocation("Boston, MA", "BOX", 71, 90);
     }
 
-    private void updateLocation(String name, String region, int x, int y) {
+    private void updateLocation(String name, String region, int x, int y){
         model.setLocation(name, region, x, y);
         locationTxt.setText(name);
         if (model.fetchForecast()) {
             updateView(model.getToday());
-            if (forecastController != null) {
+            if (forecastController != null){
                 forecastController.refresh();
             }
         }
@@ -149,19 +150,19 @@ public class TodayController implements Initializable {
     @FXML private Text outfitTxt;
     @FXML private Text activityTxt;
 
-    public void setModel(WeatherModel model, SceneManager sceneManager) {
+    public void setModel(WeatherModel model, SceneManager sceneManager){
         this.model = model;
         this.sceneManager = sceneManager;
-
-        if (model.fetchForecast()) {
-            // Get initial weather information
+        
+        // Get initial weather information
+        if (model.fetchForecast()){
             WeatherData today = model.getToday();
             updateView(today);
         }
     }
 
     // Update user interface based on weather data
-    private void updateView(WeatherData todayPeriod) {
+    private void updateView(WeatherData todayPeriod){
         if (todayPeriod == null) return;
         
         tempTxt.setText(String.valueOf(todayPeriod.getTemperature()));
@@ -189,13 +190,13 @@ public class TodayController implements Initializable {
 
     // Switch to 3-day forecast view
     @FXML
-    private void switchToForecast() {
+    private void switchToForecast(){
         if (sceneManager != null) {
             sceneManager.switchScene("Forecast");
         }
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources){
     }
 }

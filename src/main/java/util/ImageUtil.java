@@ -4,39 +4,40 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 // utility class to get icon for weather
 public class ImageUtil {
-    public static FontIcon getIconForWeather(String shortForecast, boolean isDay) {
+    public static FontIcon getIconForWeather(String shortForecast, boolean isDay){
         // default 
         String iconLiteral = "fas-cloud"; 
-        
-        if (shortForecast != null) {
+        if (shortForecast != null){
             String lowerCaseForecast = shortForecast.toLowerCase();
             // sunny/clear
-            if (lowerCaseForecast.contains("sunny") || lowerCaseForecast.contains("clear")) {
+            if (lowerCaseForecast.contains("sunny") || lowerCaseForecast.contains("clear")){
                 if(isDay){
                     iconLiteral = "fas-sun";
-                } else{
+                } 
+                else{
                     iconLiteral = "fas-moon";
                 }
             } 
             // rain
-            else if (lowerCaseForecast.contains("rain") || lowerCaseForecast.contains("showers")) {
+            else if (lowerCaseForecast.contains("rain") || lowerCaseForecast.contains("showers")){
                 iconLiteral = "fas-cloud-rain";
             } 
             // snow
-            else if (lowerCaseForecast.contains("snow")) {
+            else if (lowerCaseForecast.contains("snow")){
                 iconLiteral = "fas-snowflake";
             } 
             // thunder/storm
-            else if (lowerCaseForecast.contains("thunder") || lowerCaseForecast.contains("storm")) {
+            else if (lowerCaseForecast.contains("thunder") || lowerCaseForecast.contains("storm")){
                 iconLiteral = "fas-bolt";
             } 
             // cloud
-            else if (lowerCaseForecast.contains("cloud")) {
+            else if (lowerCaseForecast.contains("cloud")){
                 // partly cloud
-                if (lowerCaseForecast.contains("partly")) {
+                if (lowerCaseForecast.contains("partly")){
                     if(isDay){
                         iconLiteral = "fas-cloud-sun";
-                    } else{
+                    } 
+                    else{
                         iconLiteral = "fas-cloud-moon";
                     }   
                 } 
@@ -46,7 +47,6 @@ public class ImageUtil {
                 }
             }
         }
-
         // set color of icon
         FontIcon icon = new FontIcon(iconLiteral);
         icon.getStyleClass().add("weather-icon");
@@ -54,26 +54,28 @@ public class ImageUtil {
     }
 
     //Get background img base on weather and day/night
-    public static String getBackgroundUrl(String shortForecast, boolean isDay) {
-        if (shortForecast != null) {
+    public static String getBackgroundUrl(String shortForecast, boolean isDay){
+        if (shortForecast != null){
             String lower = shortForecast.toLowerCase();
             // snow-day/night
-            if (lower.contains("snow")) {
+            if (lower.contains("snow")){
                 if(isDay){
                     return "/background/snowday.jpg";
-                } else{
+                }
+                else{
                     return "/background/snownight.jpg";
                 }
             } 
             // rain
-            else if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || lower.contains("thunder")) {
+            else if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || lower.contains("thunder")){
                 return "/background/rainy.jpg";
             } 
             // sunny-clear day / clear night
-            else if (lower.contains("sunny") || lower.contains("clear")) {
+            else if (lower.contains("sunny") || lower.contains("clear")){
                 if(isDay){
                     return "/background/sunny.jpg";
-                } else{
+                } 
+                else{
                     return "/background/night.jpg";
                 }
             }
@@ -87,19 +89,21 @@ public class ImageUtil {
     }
 
     // set up text color for light/dark theme
-    public static boolean isDarkBackground(String shortForecast, boolean isDay) {
+    public static boolean isDarkBackground(String shortForecast, boolean isDay){
         // night-dark theme -> use white text
         if (!isDay) return true;
         
         // day-light theme -> use black text 
-        if (shortForecast != null) {
+        if(shortForecast != null){
             String lower = shortForecast.toLowerCase();
             // mirror the exact hierarchy of getBackgroundUrl
-            if (lower.contains("snow")) {
+            if(lower.contains("snow")){
                 return false; 
-            } else if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || lower.contains("thunder")) {
+            } 
+            else if(lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || lower.contains("thunder")){
                 return true; 
-            } else if (lower.contains("sunny") || lower.contains("clear")) {
+            } 
+            else if(lower.contains("sunny") || lower.contains("clear")) {
                 return true; 
             }
         }

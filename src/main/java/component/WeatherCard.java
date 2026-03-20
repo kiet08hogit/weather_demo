@@ -9,14 +9,14 @@ import javafx.scene.text.Text;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 // component to display weather information in a card
-public class WeatherCard extends VBox {
+public class WeatherCard extends VBox{
     private Text periodNameTxt;
     private Text shortForecastTxt;
     private FontIcon iconTxt;
     private Text tempTxt;
     private Text windTxt;
 
-    public WeatherCard() {
+    public WeatherCard(){
         super(10);
         this.getStyleClass().add("weather-card");
         this.setPadding(new Insets(20));
@@ -57,7 +57,7 @@ public class WeatherCard extends VBox {
     }
 
     // update data for weather card
-    public void setData(String name, String shortFcast, String temp, String wind, FontIcon iconObj) {
+    public void setData(String name, String shortFcast, String temp, String wind, FontIcon iconObj){
         periodNameTxt.setText(name);
         shortForecastTxt.setText(shortFcast);
         tempTxt.setText(temp + "\u00B0 F");

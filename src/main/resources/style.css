@@ -1,10 +1,10 @@
-.root {
+.root{
     /* default text format */
     -fx-font-family: "Ubuntu", "DejaVu Sans", "Segoe UI", "Inter", "Arial", sans-serif;
 }
 
 /* background */
-.root-pane {
+.root-pane{
     /* default background image */
     -fx-background-image: url("background/windy day.jpg");
     /* make background image cover the whole screen */
@@ -64,26 +64,26 @@
 /* dark theme color card*/
 .dark-theme .main-weather-card,
 .dark-theme .stat-card,
-.dark-theme .weather-card {
+.dark-theme .weather-card{
     -fx-background-color: rgba(28, 26, 26, 0.15);
 }
 
 /* light theme color card*/
 .light-theme .main-weather-card,
 .light-theme .stat-card,
-.light-theme .weather-card {
+.light-theme .weather-card{
     -fx-background-color: rgba(0, 0, 0, 0.15);
 }
 
 /* default text color */
-.text {
+.text{
     -fx-fill: white;
 }
 
 /* top bar */
 .top-bar {}
 
-.top-bar-title {
+.top-bar-title{
     -fx-font-size: 18px;
     -fx-font-weight: bold;
 }

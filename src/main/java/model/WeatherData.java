@@ -1,7 +1,7 @@
 package model;
 
 // internal ui data model
-public class WeatherData {
+public class WeatherData{
     private String name;
     private boolean isDaytime;
     private int temperature;
@@ -9,7 +9,7 @@ public class WeatherData {
     private String windSpeed;
     private String windDirection;
 
-    public WeatherData(String name, boolean isDaytime, int temperature, String shortForecast, String windSpeed, String windDirection) {
+    public WeatherData(String name, boolean isDaytime, int temperature, String shortForecast, String windSpeed, String windDirection){
         this.name = name;
         this.isDaytime = isDaytime;
         this.temperature = temperature;
@@ -18,10 +18,10 @@ public class WeatherData {
         this.windDirection = windDirection;
     }
 
-    public String getName() { return name; }
-    public boolean isDaytime() { return isDaytime; }
-    public int getTemperature() { return temperature; }
-    public String getShortForecast() { return shortForecast; }
-    public String getWindSpeed() { return windSpeed; }
-    public String getWindDirection() { return windDirection; }
+    public String getName() {return name;}
+    public boolean isDaytime() {return isDaytime;}
+    public int getTemperature() {return temperature;}
+    public String getShortForecast() {return shortForecast;}
+    public String getWindSpeed() {return windSpeed;}
+    public String getWindDirection() {return windDirection;}
 }

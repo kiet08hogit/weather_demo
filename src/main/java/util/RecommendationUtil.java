@@ -4,7 +4,7 @@ package util;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RecommendationUtil {
+public class RecommendationUtil{
 
     private static class CityActivities {
         String rain;
@@ -13,7 +13,7 @@ public class RecommendationUtil {
         String cozy;
         String defaultAct;
 
-        CityActivities(String rain, String snow, String sunny, String cozy, String defaultAct) {
+        CityActivities(String rain, String snow, String sunny, String cozy, String defaultAct){
             this.rain = rain;
             this.snow = snow;
             this.sunny = sunny;
@@ -253,62 +253,89 @@ public class RecommendationUtil {
         ));
     }
 
-    public static String getClothing(int temp, String weather) {
+    public static String getClothing(int temp, String weather){
         String w = weather != null ? weather.toLowerCase() : "";
-        if (w.contains("rain") || w.contains("showers")) {
+        if (w.contains("rain") || w.contains("showers")){
             return "Rain jacket and waterproof shoes";
-        } else if (w.contains("snow")) {
+        }
+        else if (w.contains("snow")){
             return "Heavy winter coat, gloves, and boots";
-        } else if (temp < 40) {
+        } 
+        else if (temp< 40){
             return "Warm coat, scarf, and beanie";
-        } else if (temp < 60) {
+        } 
+        else if (temp < 60){
             return "Light jacket or sweater and long pants";
-        } else if (temp < 75) {
+        } 
+        else if (temp <75){
             return "T-shirt and light pants";
-        } else {
+        } 
+        else{
             return "Shorts, t-shirt, and sunglasses";
         }
     }
 
     // Get activity recommendation based on location, temperature and weather
-    public static String getActivity(String location, int temp, String weather) {
-        String w = weather != null ? weather.toLowerCase() : "";
-        String loc = location != null ? location.toLowerCase() : "";
+    public static String getActivity(String location, int temp, String weather){
+        String w ;
+        if (weather != null){
+            w = weather.toLowerCase();
+        } 
+        else{
+            w = "";
+        }
+        
+        String loc;
+        if (location !=null){
+            loc = location.toLowerCase();
+        } 
+        else{
+            loc = "";
+        }
 
         CityActivities activities = null;
-        for (String key : CITY_MAP.keySet()) {
-            if (loc.contains(key)) {
+        for (String key : CITY_MAP.keySet()){
+            if (loc.contains(key)){
                 activities = CITY_MAP.get(key);
                 break;
             }
         }
 
-        if (activities != null) {
-            if (w.contains("rain") || w.contains("showers") || w.contains("storm")) {
+        if(activities != null){
+            if (w.contains("rain") || w.contains("showers") || w.contains("storm")){
                 return activities.rain;
-            } else if (w.contains("snow") || w.contains("snow showers")) {
+            }
+            else if (w.contains("snow") || w.contains("snow showers")){
                 return activities.snow;
-            } else if (w.contains("sunny") || w.contains("clear") || w.contains("mostly sunny") || w.contains("partly sunny")) {
+            } 
+            else if (w.contains("sunny") || w.contains("clear") || w.contains("mostly sunny") || w.contains("partly sunny")){
                 return activities.sunny;
-            } else if (temp >= 50 && temp <= 70 && !w.contains("rain") && !w.contains("snow")) {
+            } 
+            else if (temp >= 50 && temp <= 70 && !w.contains("rain") && !w.contains("snow")){
                 return activities.cozy;
-            } else {
+            } 
+            else{
                 return activities.defaultAct;
             }
         }
 
         // Default recommendations for other locations
-        if (w.contains("rain") || w.contains("showers") || w.contains("storm")) {
+        if (w.contains("rain") || w.contains("showers") || w.contains("storm")){
             return "Perfect day for an indoor museum or movie";
-        } else if (w.contains("snow")) {
+        } 
+        else if (w.contains("snow")){
             return "Build a snowman or drink hot cocoa inside";
-        } else if (temp < 40) {
+        } 
+        else if (temp < 40){
             return "Visit a cozy cafe or read a book indoors";
-        } else if (temp > 85) {
+        } 
+        else if (temp > 85){
             return "Great day for the pool or staying in the AC";
-        } else if (w.contains("sunny") || w.contains("clear")) {
+        } 
+        else if (w.contains("sunny") || w.contains("clear")){
             return "Excellent weather for a nice walk or run!";
-        } else {
+        } 
+        else{
             return "Good day for a casual outdoor stroll";
         }
     }
