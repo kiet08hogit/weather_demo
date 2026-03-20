@@ -21,7 +21,7 @@ public class SceneManager {
     public void addRoot(String name, Parent root) {
         roots.put(name, root);
     }
-
+    
     public void switchScene(String name) {
         Parent root = roots.get(name);
         if (root != null) {

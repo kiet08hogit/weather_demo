@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/* Controller for 3-day forecast view */
+// controller for 3-day forecast view
 public class ForecastController implements Initializable {
     private WeatherModel model;
     private SceneManager sceneManager;
@@ -22,14 +22,14 @@ public class ForecastController implements Initializable {
     @FXML private GridPane grid;
     @FXML private javafx.scene.layout.BorderPane rootPane;
 
-    // Assign model and switch screen
+    // assign model and switch screen
     public void setModel(WeatherModel model, SceneManager sceneManager) {
         this.model = model;
         this.sceneManager = sceneManager;
         refresh();
     }
 
-    // Refresh data display
+    // refresh data display
     public void refresh() {
         if (model != null) {
             List<WeatherData> forecast = model.getThreeDayForecast();
@@ -37,12 +37,12 @@ public class ForecastController implements Initializable {
         }
     }
 
-    // Update list of weather forecast cards
+    // update list of weather forecast cards
     private void updateView(List<WeatherData> periods) {
-        grid.getChildren().clear();
+        grid.getChildren().clear(); //remove all existing cards
         if (periods == null || periods.isEmpty()) return;
 
-        // Use the first forecast to set the background and theme
+        // use the first forecast to set the background and theme
         WeatherData first = periods.get(0);
         String bgUrl = ImageUtil.getBackgroundUrl(first.getShortForecast(), first.isDaytime());
         rootPane.setStyle("-fx-background-image: url('" + bgUrl + "');");
@@ -55,12 +55,13 @@ public class ForecastController implements Initializable {
         }
 
         int index = 0;
+        // loop through each period
         for (WeatherData p : periods) {
             WeatherCard card = new WeatherCard();
             FontIcon icon = ImageUtil.getIconForWeather(p.getShortForecast(), p.isDaytime());
-            card.setData(p.getName(), p.getShortForecast(), String.valueOf(p.getTemperature()), 
-                         p.getWindSpeed() + " " + p.getWindDirection(), icon);
-            
+            card.setData(p.getName(), p.getShortForecast(), String.valueOf(p.getTemperature()), p.getWindSpeed() + " " + p.getWindDirection(), icon);
+
+            // calculate column and row to fix with the index
             int col = index % 2;
             int row = index / 2;
             grid.add(card, col, row);

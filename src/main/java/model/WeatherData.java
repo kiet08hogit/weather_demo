@@ -1,6 +1,6 @@
 package model;
 
-// STEP 2: Internal UI Data Model
+// internal ui data model
 public class WeatherData {
     private String name;
     private boolean isDaytime;
