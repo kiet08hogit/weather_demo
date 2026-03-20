@@ -1,0 +1,265 @@
+.root {
+    /* default text format */
+    -fx-font-family: "Ubuntu", "DejaVu Sans", "Segoe UI", "Inter", "Arial", sans-serif;
+}
+
+/* background */
+.root-pane {
+    /* default background image */
+    -fx-background-image: url("background/windy day.jpg");
+    /* make background image cover the whole screen */
+    -fx-background-size: cover;
+    /* center background image */
+    -fx-background-position: center;
+}
+
+/* dark theme */
+.dark-theme .text,
+.dark-theme .label,
+.dark-theme .stat-val,
+.dark-theme .stat-lbl,
+.dark-theme .location-text,
+.dark-theme .date-text,
+.dark-theme .main-temp,
+.dark-theme .main-temp-unit,
+.dark-theme .main-short-forecast,
+.dark-theme .forecast-view-title,
+.dark-theme .top-bar-title,
+.dark-theme .card-period-name,
+.dark-theme .card-short-forecast,
+.dark-theme .card-temp,
+.dark-theme .card-wind,
+.dark-theme .ikonli-font-icon {
+    /* white text for dark theme */
+    -fx-fill: white;
+    -fx-text-fill: white;
+    -fx-icon-color: white;
+}
+
+/* light theme */
+.light-theme .text,
+.light-theme .label,
+.light-theme .stat-val,
+.light-theme .stat-lbl,
+.light-theme .location-text,
+.light-theme .date-text,
+.light-theme .main-temp,
+.light-theme .main-temp-unit,
+.light-theme .main-short-forecast,
+.light-theme .forecast-view-title,
+.light-theme .top-bar-title,
+.light-theme .card-period-name,
+.light-theme .card-short-forecast,
+.light-theme .card-temp,
+.light-theme .card-wind,
+.light-theme .ikonli-font-icon {
+    /* dark text for light theme */
+    -fx-fill: #333;
+    -fx-text-fill: #333;
+
+    /* icon color for light theme */
+    -fx-icon-color: #333;
+}
+
+/* dark theme color card*/
+.dark-theme .main-weather-card,
+.dark-theme .stat-card,
+.dark-theme .weather-card {
+    -fx-background-color: rgba(28, 26, 26, 0.15);
+}
+
+/* light theme color card*/
+.light-theme .main-weather-card,
+.light-theme .stat-card,
+.light-theme .weather-card {
+    -fx-background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* default text color */
+.text {
+    -fx-fill: white;
+}
+
+/* top bar */
+.top-bar {}
+
+.top-bar-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* button */
+.top-bar-btn {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 15px;
+    -fx-cursor: hand;
+}
+
+/* button hover */
+.top-bar-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* location and date */
+.location-text {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+.date-text {
+    -fx-font-size: 15px;
+    -fx-opacity: 0.8;
+}
+
+/* drop down button - locations */
+.location-dropdown-btn {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 8px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-max-width: 32px;
+    -fx-max-height: 32px;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+/* dropdown button hover effect */
+.location-dropdown-btn:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* hide label */
+.location-dropdown-btn>.label {
+    -fx-padding: 0;
+    -fx-display: none;
+}
+
+/* arrow color */
+.location-dropdown-btn .arrow {
+    -fx-background-color: white;
+    -fx-min-width: 8px;
+    -fx-min-height: 5px;
+}
+
+/* location options text*/
+.context-menu .menu-item .label,
+.context-menu .menu-item .text {
+    -fx-text-fill: black;
+    -fx-fill: black;
+}
+
+/* location options background */
+.context-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 8px;
+}
+
+/* main weather card */
+.main-weather-card {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+
+/* icon */
+.main-icon {
+    -fx-font-size: 70px;
+    -fx-fill: white;
+    -fx-icon-color: white;
+    -fx-icon-size: 70px;
+}
+
+/* temperature */
+.main-temp {
+    -fx-font-size: 80px;
+    -fx-font-weight: bold;
+}
+
+.main-temp-unit {
+    -fx-font-size: 30px;
+    -fx-translate-y: -25px;
+}
+
+/* forecast description */
+.main-short-forecast {
+    -fx-font-size: 22px;
+}
+
+/* status card */
+.stat-card {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 12px;
+    -fx-padding: 15px 30px;
+    -fx-min-width: 180px;
+}
+
+.stat-lbl {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.8;
+}
+
+.stat-val {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* forecast view title */
+.forecast-view-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+/* scrollable weather card */
+.weather-card {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-background-radius: 15px;
+    -fx-min-width: 320px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+/* period name */
+.card-period-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* short description */
+.card-short-forecast {
+    -fx-font-size: 12px;
+    -fx-opacity: 0.85;
+}
+
+/* icon */
+.card-icon {
+    -fx-font-size: 40px;
+    -fx-icon-color: white;
+    -fx-icon-size: 40px;
+}
+
+.card-temp {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
+/* wind */
+.card-wind {
+    -fx-font-size: 12px;
+    -fx-opacity: 0.8;
+}
+
+/* scroll pane */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.scroll-pane>.viewport {
+    -fx-background-color: transparent;
+}

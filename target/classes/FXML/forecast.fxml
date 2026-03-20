@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane fx:id="rootPane" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.ForecastController" styleClass="root-pane">
+    <top>
+        <!-- App logo, button to switch to today's view -->
+        <HBox alignment="CENTER" spacing="10" styleClass="top-bar">
+            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+            <HBox alignment="CENTER" spacing="8">
+                <FontIcon iconLiteral="fas-cloud" iconSize="22" iconColor="white"/>
+                <Text text="Weatherify" styleClass="top-bar-title"/>
+            </HBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Today's Weather" onAction="#switchToToday" styleClass="top-bar-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <!-- 3-day forecast grid -->
+        <VBox alignment="TOP_CENTER" spacing="20">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <Text text="3-Day Forecast" styleClass="forecast-view-title"/>
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: transparent; -fx-padding: 0;">
+                <GridPane fx:id="grid" alignment="CENTER" hgap="20" vgap="20"/>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>
