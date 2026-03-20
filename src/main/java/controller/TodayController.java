@@ -30,7 +30,7 @@ public class TodayController implements Initializable {
         this.forecastController = fc;
     }
 
-    // Map for some default cities coordinates
+    // map for some default cities coordinates
     private static final java.util.Map<String, String> CITY_COORDS = java.util.Map.ofEntries(
         java.util.Map.entry("new york", "40.71,-74.00"),
         java.util.Map.entry("los angeles", "34.05,-118.24"),
@@ -60,7 +60,7 @@ public class TodayController implements Initializable {
         java.util.Map.entry("atlanta", "33.74,-84.38")
     );
 
-    // Handle adding new location from user
+    // handle adding new location from user
     @FXML
     private void handleAddLocation() {
         javafx.scene.control.TextInputDialog dialog = new javafx.scene.control.TextInputDialog("New York");
@@ -95,10 +95,10 @@ public class TodayController implements Initializable {
                         String cityName = props.path("relativeLocation").path("properties").path("city").asText();
                         String stateName = props.path("relativeLocation").path("properties").path("state").asText();
                         
-                        // Use the input name if it's a known city, otherwise use NWS name
+                        // use the input name if it's a known city, else use NWS name
                         String finalName = cityNameInput.substring(0, 1).toUpperCase() + cityNameInput.substring(1) + ", " + stateName;
                         if (cityNameInput.contains(" ")) {
-                             // Handle multi-word names like "San Francisco"
+                             // handle multi word names like "San Francisco"
                              String[] words = cityNameInput.split(" ");
                              finalName = "";
                              for (String w : words) finalName += w.substring(0, 1).toUpperCase() + w.substring(1) + " ";
@@ -114,7 +114,7 @@ public class TodayController implements Initializable {
         }
     }
 
-    // Functions to switch between default cities in option list
+    // default city handlers
     @FXML 
     private void handleSwitchLocationChicago() {
         updateLocation("Chicago, IL", "LOT", 77, 70);

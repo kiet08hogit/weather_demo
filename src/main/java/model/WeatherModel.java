@@ -9,16 +9,16 @@ import service.RealWeatherService;
 import service.WeatherProxy;
 
 public class WeatherModel {
-    private List<WeatherData> forecast; // Utilizing the decoupled WeatherData model
+    private List<WeatherData> forecast; // utilizing the decoupled WeatherData model
     private String currentLocationName = "Chicago, IL";
     private String gridRegion = "LOT";
     private int gridX = 77;
     private int gridY = 70;
     
-    private IWeatherAdapter adapter; // Retain an instance of the adapter layer
+    private IWeatherAdapter adapter; // retain an instance of the adapter layer
 
     public WeatherModel() {
-        // STEP 8: Instantiate the architecture map
+        // instantiate the architecture map
         IWeatherService real = new RealWeatherService();
         IWeatherService proxy = new WeatherProxy(real);
         adapter = new NWSWeatherAdapter(proxy);

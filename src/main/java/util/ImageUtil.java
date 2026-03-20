@@ -57,7 +57,7 @@ public class ImageUtil {
     public static String getBackgroundUrl(String shortForecast, boolean isDay) {
         if (shortForecast != null) {
             String lower = shortForecast.toLowerCase();
-            // snow - day/night
+            // snow-day/night
             if (lower.contains("snow")) {
                 if(isDay){
                     return "/background/snowday.jpg";
@@ -78,7 +78,7 @@ public class ImageUtil {
                 }
             }
         }
-        // default - cloudy - day/night
+        // default-cloudy-day/night
         if(isDay){
             return "/background/cloudyday.jpg";
         } else{
@@ -88,22 +88,21 @@ public class ImageUtil {
 
     // set up text color for light/dark theme
     public static boolean isDarkBackground(String shortForecast, boolean isDay) {
-        // night - dark theme -> use white text
+        // night-dark theme -> use white text
         if (!isDay) return true;
         
-        // day - light theme -> use black text 
+        // day-light theme -> use black text 
         if (shortForecast != null) {
             String lower = shortForecast.toLowerCase();
-            
-            // Mirror the exact hierarchy of getBackgroundUrl
+            // mirror the exact hierarchy of getBackgroundUrl
             if (lower.contains("snow")) {
-                return false; // snowday.jpg is extremely bright
+                return false; 
             } else if (lower.contains("rain") || lower.contains("showers") || lower.contains("storm") || lower.contains("thunder")) {
-                return true; // rainy.jpg is usually dark/grey
+                return true; 
             } else if (lower.contains("sunny") || lower.contains("clear")) {
-                return true; // sunny.jpg 
+                return true; 
             }
         }
-        return false; // default cloudyday.jpg is light
+        return false; 
     }
 }

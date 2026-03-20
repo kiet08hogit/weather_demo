@@ -22,36 +22,29 @@ public class MainApp extends Application {
         try {
             primaryStage.setTitle("Weatherify");
             primaryStage.setResizable(true);
-
             sceneManager = new SceneManager(primaryStage);
             weatherModel = new WeatherModel();
-
-            // Load Today Scene
+            // load today scene
             FXMLLoader todayLoader = new FXMLLoader(getClass().getResource("/FXML/today.fxml"));
             Parent todayRoot = todayLoader.load();
             TodayController todayCtrl = todayLoader.getController();
             todayCtrl.setModel(weatherModel, sceneManager);
-
-            // Load Forecast Scene
+            // load forecast scene
             FXMLLoader forecastLoader = new FXMLLoader(getClass().getResource("/FXML/forecast.fxml"));
             Parent forecastRoot = forecastLoader.load();
             ForecastController forecastCtrl = forecastLoader.getController();
             forecastCtrl.setModel(weatherModel, sceneManager);
-
-            // Link controllers
+            // link controllers
+            
             todayCtrl.setForecastController(forecastCtrl);
-
-            // Setup single Main Scene
+            // setup single main scene
             Scene mainScene = new Scene(new javafx.scene.layout.Pane(), 900, 750);
-
-            // Add stylesheet
+            // add stylesheet
             String cssPath = getClass().getResource("/style.css") != null ? getClass().getResource("/style.css").toExternalForm() : "data:text/css,";
             mainScene.getStylesheets().add(cssPath);
-
             sceneManager.setMainScene(mainScene);
             sceneManager.addRoot("Today", todayRoot);
             sceneManager.addRoot("Forecast", forecastRoot);
-
             sceneManager.switchScene("Today");
             primaryStage.show();
         } catch (Exception e) {
